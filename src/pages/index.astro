@@ -56,7 +56,7 @@ import { faq_general } from '../data/faq.js';
         <div class="hero__image">
           <!-- TODO: sustituir por foto real del local o de Bruno -->
           <img
-            src="/images/hero-placeholder.jpg"
+            src={`${import.meta.env.BASE_URL}images/hero-placeholder.jpg`}
             alt="Fachada de Optifatima en Alcobendas"
             loading="eager"
           />
@@ -74,7 +74,7 @@ import { faq_general } from '../data/faq.js';
         <div class="bruno__image">
           <!-- TODO: foto profesional de Bruno -->
           <img
-            src="/images/bruno-placeholder.jpg"
+            src={`${import.meta.env.BASE_URL}images/bruno-placeholder.jpg`}
             alt="Bruno Martín Tamayo, propietario de Optifatima"
             loading="lazy"
           />
@@ -149,7 +149,7 @@ import { faq_general } from '../data/faq.js';
 
       <div class="especialidades-grid">
         {especialidades.map((esp) => (
-          <a href={`/${esp.slug}`} class="especialidad-card">
+          <a href={`${import.meta.env.BASE_URL}${esp.slug}`} class="especialidad-card">
             <h3>{esp.titulo_corto}</h3>
             <p>{esp.hero.subtitulo}</p>
             <span class="especialidad-card__link">Saber más →</span>

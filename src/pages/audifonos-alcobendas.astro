@@ -56,9 +56,9 @@ const schemaExtra = {
       <div class="esp-hero__grid">
         <div class="esp-hero__content">
           <nav class="esp-hero__breadcrumbs" aria-label="Migas de pan">
-            <a href="/">Inicio</a>
+            <a href={import.meta.env.BASE_URL}>Inicio</a>
             <span>/</span>
-            <a href="/#especialidades">Especialidades</a>
+            <a href={`${import.meta.env.BASE_URL}#especialidades`}>Especialidades</a>
             <span>/</span>
             <span>{esp.titulo_corto}</span>
           </nav>
@@ -75,7 +75,7 @@ const schemaExtra = {
         <div class="esp-hero__image">
           <!-- TODO: foto profesional de audiómetro / cabina audiometría / audífono -->
           <img
-            src="/images/audifonos-placeholder.jpg"
+            src={`${import.meta.env.BASE_URL}images/audifonos-placeholder.jpg`}
             alt="Centro auditivo de Optifatima en Alcobendas"
             loading="eager"
           />

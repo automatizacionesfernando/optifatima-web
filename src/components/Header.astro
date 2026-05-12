@@ -5,24 +5,24 @@ import Logo from './Logo.astro';
 
 <header class="site-header">
   <div class="container container--wide site-header__inner">
-    <a href="/" class="site-header__logo">
+    <a href={import.meta.env.BASE_URL} class="site-header__logo">
       <Logo variant="header" size={28} />
       <span>Opti<em>fatima</em></span>
     </a>
 
     <nav class="site-header__nav" aria-label="Navegación principal">
-      <a href="/#servicios">Servicios</a>
-      <a href="/#especialidades">Especialidades</a>
-      <a href="/#bruno">Quién te atiende</a>
-      <a href="/#marcas">Marcas</a>
-      <a href="/#contacto">Contacto</a>
+      <a href={`${import.meta.env.BASE_URL}#servicios`}>Servicios</a>
+      <a href={`${import.meta.env.BASE_URL}#especialidades`}>Especialidades</a>
+      <a href={`${import.meta.env.BASE_URL}#bruno`}>Quién te atiende</a>
+      <a href={`${import.meta.env.BASE_URL}#marcas`}>Marcas</a>
+      <a href={`${import.meta.env.BASE_URL}#contacto`}>Contacto</a>
     </nav>
 
     <div class="site-header__actions">
       <a href={`tel:${negocio.telefono_internacional}`} class="site-header__phone">
         {negocio.telefono}
       </a>
-      <a href="/#contacto" class="btn btn--primary site-header__cta">
+      <a href={`${import.meta.env.BASE_URL}#contacto`} class="btn btn--primary site-header__cta">
         Pide cita
       </a>
     </div>
