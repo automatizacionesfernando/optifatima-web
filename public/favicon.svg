@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Fondo circular en crema (paleta de la web) -->
+  <circle cx="32" cy="32" r="32" fill="#F5EFE6"/>
+
+  <!-- Ojo: óvalo con borde terracota -->
+  <ellipse
+    cx="32"
+    cy="32"
+    rx="22"
+    ry="13"
+    stroke="#B5532A"
+    stroke-width="3.5"
+    fill="none"
+  />
+
+  <!-- Iris: círculo terracota con pupila -->
+  <circle cx="32" cy="32" r="8" fill="#B5532A"/>
+
+  <!-- Pupila: círculo verde profundo (color "tinta" de la web) -->
+  <circle cx="32" cy="32" r="4" fill="#1F3530"/>
+
+  <!-- Brillo del ojo (highlight pequeño) -->
+  <circle cx="34" cy="30" r="1.5" fill="#F5EFE6"/>
+</svg>

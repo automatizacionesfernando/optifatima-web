@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "PowerShell(Stop-Process -Name node -Force -ErrorAction SilentlyContinue)"
+    ]
+  }
+}

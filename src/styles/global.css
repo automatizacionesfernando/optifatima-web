@@ -1,0 +1,241 @@
+/* ============================================================
+   OPTIFATIMA · ESTILOS GLOBALES
+   ============================================================
+   Estética: cookbook editorial · Fraunces (display) + Inter (UI)
+   Paleta:   terracota cálido + crema + verde profundo
+   ============================================================ */
+
+/* -------------------------------------------------------------
+   1 · TIPOGRAFÍAS (Google Fonts, carga optimizada)
+   ------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* -------------------------------------------------------------
+   2 · VARIABLES CSS — design tokens
+   ------------------------------------------------------------- */
+:root {
+  /* Paleta principal */
+  --color-crema:        #F5EFE6;  /* fondo principal */
+  --color-crema-claro:  #FAF6EF;  /* secciones alternas */
+  --color-crema-oscuro: #E8DFD0;  /* bordes sutiles, separadores */
+  --color-terracota:    #B5532A;  /* acento principal, CTAs */
+  --color-terracota-osc:#8C3F1E;  /* hover, énfasis */
+  --color-verde-prof:   #1F3530;  /* textos principales, navegación */
+  --color-verde-medio:  #4A5D55;  /* textos secundarios */
+  --color-tinta:        #1A1A1A;  /* negro casi puro para títulos */
+  --color-gris-suave:   #6B6B6B;  /* texto auxiliar */
+  --color-blanco:       #FFFFFF;
+
+  /* Tipografía */
+  --font-display: 'Fraunces', 'Times New Roman', serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Escala tipográfica (modular, base 1rem = 16px) */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.375rem;
+  --text-2xl:  1.75rem;
+  --text-3xl:  2.25rem;
+  --text-4xl:  3rem;
+  --text-5xl:  4rem;
+  --text-6xl:  5.5rem;
+
+  /* Espaciado */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.5rem;
+  --space-6:  2rem;
+  --space-8:  3rem;
+  --space-10: 4rem;
+  --space-12: 6rem;
+  --space-16: 8rem;
+  --space-20: 10rem;
+
+  /* Contenedores */
+  --container-narrow: 720px;
+  --container-base:   1100px;
+  --container-wide:   1320px;
+
+  /* Otros */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* -------------------------------------------------------------
+   3 · RESET MÍNIMO
+   ------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-verde-prof);
+  background: var(--color-crema);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video { max-width: 100%; height: auto; display: block; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+a { color: inherit; text-decoration: none; transition: color var(--transition); }
+
+/* -------------------------------------------------------------
+   4 · TIPOGRAFÍA
+   ------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--color-tinta);
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, var(--text-6xl)); font-weight: 350; }
+h2 { font-size: clamp(2rem, 4.5vw, var(--text-4xl)); font-weight: 400; }
+h3 { font-size: clamp(1.5rem, 3vw, var(--text-2xl)); font-weight: 500; }
+h4 { font-size: var(--text-xl); font-weight: 500; }
+
+/* Cursiva editorial — uso destacado dentro de títulos */
+em {
+  font-style: italic;
+  font-variation-settings: 'opsz' 144;
+}
+
+p { margin-bottom: var(--space-4); max-width: 65ch; }
+
+/* -------------------------------------------------------------
+   5 · UTILIDADES DE LAYOUT
+   ------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-base);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+.container--narrow { max-width: var(--container-narrow); }
+.container--wide   { max-width: var(--container-wide); }
+
+.section {
+  padding: var(--space-12) 0;
+}
+.section--tight { padding: var(--space-10) 0; }
+.section--loose { padding: var(--space-16) 0; }
+
+.section--crema-claro { background: var(--color-crema-claro); }
+.section--verde       { background: var(--color-verde-prof); color: var(--color-crema); }
+.section--verde h1,
+.section--verde h2,
+.section--verde h3 { color: var(--color-crema); }
+
+/* -------------------------------------------------------------
+   6 · "EYEBROW" — pequeño texto sobre los títulos
+   ------------------------------------------------------------- */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-terracota);
+  margin-bottom: var(--space-4);
+}
+
+/* -------------------------------------------------------------
+   7 · BOTONES
+   ------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-full);
+  transition: all var(--transition);
+  cursor: pointer;
+}
+.btn--primary {
+  background: var(--color-terracota);
+  color: var(--color-crema);
+}
+.btn--primary:hover {
+  background: var(--color-terracota-osc);
+  transform: translateY(-1px);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--color-verde-prof);
+  border: 1px solid var(--color-verde-prof);
+}
+.btn--ghost:hover {
+  background: var(--color-verde-prof);
+  color: var(--color-crema);
+}
+
+/* -------------------------------------------------------------
+   8 · TARJETAS Y BLOQUES COMUNES
+   ------------------------------------------------------------- */
+.card {
+  background: var(--color-blanco);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: transform var(--transition);
+}
+.card:hover { transform: translateY(-4px); }
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: var(--space-8);
+}
+
+/* -------------------------------------------------------------
+   9 · FAQ — patrón <details>
+   ------------------------------------------------------------- */
+.faq-item {
+  border-bottom: 1px solid var(--color-crema-oscuro);
+  padding: var(--space-5) 0;
+}
+.faq-item summary {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-tinta);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  font-size: var(--text-2xl);
+  color: var(--color-terracota);
+  transition: transform var(--transition);
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p {
+  padding-top: var(--space-4);
+  color: var(--color-verde-medio);
+}

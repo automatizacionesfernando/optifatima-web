@@ -1,0 +1,120 @@
+---
+// ============================================================
+// OPTIFATIMA · LAYOUT BASE
+// ============================================================
+// Layout principal usado por todas las páginas (home + 7 sub-
+// páginas long-tail). Incluye <head>, meta SEO, Open Graph,
+// Schema.org JSON-LD (LocalBusiness + Optician + HearingAidStore)
+// y los componentes Header/Footer.
+// ============================================================
+
+import { negocio } from '../data/negocio.js';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  /** Datos Schema.org adicionales específicos de la página (ej. una especialidad) */
+  schemaExtra?: object;
+}
+
+const {
+  title,
+  description,
+  canonical = negocio.urls.sitio_web,
+  ogImage = '/og-default.jpg',
+  schemaExtra,
+} = Astro.props;
+
+// Schema.org base — Optician + HearingAidStore
+const schemaBase = {
+  '@context': 'https://schema.org',
+  '@type': ['Optician', 'HearingAidStore', 'LocalBusiness'],
+  name: negocio.nombre,
+  description: negocio.tagline,
+  url: negocio.urls.sitio_web,
+  telephone: negocio.telefono_internacional,
+  email: negocio.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: negocio.direccion.calle,
+    addressLocality: negocio.direccion.ciudad,
+    postalCode: negocio.direccion.cp,
+    addressRegion: negocio.direccion.provincia,
+    addressCountry: 'ES',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: negocio.direccion.lat,
+    longitude: negocio.direccion.lng,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '10:00',
+      closes: '20:30',
+    },
+  ],
+  founder: {
+    '@type': 'Person',
+    name: negocio.profesional.nombre,
+    jobTitle: negocio.profesional.titulaciones.join(', '),
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: negocio.resenas.rating,
+    reviewCount: negocio.resenas.total,
+  },
+  priceRange: '€€',
+};
+
+const schema = schemaExtra
+  ? { ...schemaBase, ...schemaExtra }
+  : schemaBase;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="generator" content={Astro.generator} />
+
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content={negocio.nombre} />
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</head>
+<body>
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

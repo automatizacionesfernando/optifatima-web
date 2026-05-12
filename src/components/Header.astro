@@ -1,0 +1,89 @@
+---
+import { negocio } from '../data/negocio.js';
+import Logo from './Logo.astro';
+---
+
+<header class="site-header">
+  <div class="container container--wide site-header__inner">
+    <a href="/" class="site-header__logo">
+      <Logo variant="header" size={28} />
+      <span>Opti<em>fatima</em></span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="Navegación principal">
+      <a href="/#servicios">Servicios</a>
+      <a href="/#especialidades">Especialidades</a>
+      <a href="/#bruno">Quién te atiende</a>
+      <a href="/#marcas">Marcas</a>
+      <a href="/#contacto">Contacto</a>
+    </nav>
+
+    <div class="site-header__actions">
+      <a href={`tel:${negocio.telefono_internacional}`} class="site-header__phone">
+        {negocio.telefono}
+      </a>
+      <a href="/#contacto" class="btn btn--primary site-header__cta">
+        Pide cita
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-crema);
+    border-bottom: 1px solid var(--color-crema-oscuro);
+    backdrop-filter: blur(8px);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+    padding: var(--space-4) var(--space-5);
+  }
+  .site-header__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 500;
+    color: var(--color-verde-prof);
+    letter-spacing: -0.02em;
+  }
+  .site-header__logo em {
+    color: var(--color-terracota);
+    font-style: italic;
+  }
+  .site-header__nav {
+    display: none;
+    gap: var(--space-6);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-verde-prof);
+  }
+  .site-header__nav a:hover { color: var(--color-terracota); }
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .site-header__phone {
+    display: none;
+    font-weight: 600;
+    color: var(--color-verde-prof);
+  }
+  .site-header__phone:hover { color: var(--color-terracota); }
+  .site-header__cta {
+    padding: var(--space-3) var(--space-5);
+    font-size: var(--text-sm);
+  }
+  @media (min-width: 768px) {
+    .site-header__nav    { display: flex; }
+    .site-header__phone  { display: inline-block; }
+  }
+</style>

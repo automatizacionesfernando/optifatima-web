@@ -1,0 +1,458 @@
+---
+// ============================================================
+// PÁGINA · Home
+// ============================================================
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactoBlock from '../components/ContactoBlock.astro';
+import { negocio } from '../data/negocio.js';
+import { especialidades, servicios_generales } from '../data/especialidades.js';
+import { faq_general } from '../data/faq.js';
+---
+
+<BaseLayout
+  title={`${negocio.nombre} · Óptica y audiología en Alcobendas`}
+  description="Óptica y audiología familiar en Alcobendas desde 2013. Te atiende Bruno Martín Tamayo, óptico-optometrista y Técnico Superior en Audiología Protésica con más de 25 años de experiencia."
+>
+
+  <!-- ====================================================
+       1 · HERO
+       ==================================================== -->
+  <section class="hero">
+    <div class="container container--wide">
+      <div class="hero__grid">
+        <div class="hero__content">
+          <span class="eyebrow">Tu óptica en Alcobendas</span>
+          <h1>
+            Experiencia de gran cadena,<br/>
+            trato de <em>óptica familiar</em>.
+          </h1>
+          <p class="hero__lead">
+            Te atiende siempre la misma persona: Bruno Martín Tamayo,
+            óptico-optometrista y Técnico Superior en Audiología Protésica.
+            Más de 25 años en el sector, ahora dedicado a su óptica de Alcobendas.
+          </p>
+          <div class="hero__cta">
+            <a href="#contacto" class="btn btn--primary">Pide tu cita</a>
+            <a href={`tel:${negocio.telefono_internacional}`} class="btn btn--ghost">
+              {negocio.telefono}
+            </a>
+          </div>
+          <div class="hero__stats">
+            <div>
+              <span class="hero__stat-num">{negocio.profesional.años_experiencia}+</span>
+              <span class="hero__stat-lbl">años de experiencia</span>
+            </div>
+            <div>
+              <span class="hero__stat-num">{negocio.resenas.rating}★</span>
+              <span class="hero__stat-lbl">{negocio.resenas.total} reseñas en Google</span>
+            </div>
+            <div>
+              <span class="hero__stat-num">24h</span>
+              <span class="hero__stat-lbl">reparación de audífonos</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__image">
+          <!-- TODO: sustituir por foto real del local o de Bruno -->
+          <img
+            src="/images/hero-placeholder.jpg"
+            alt="Fachada de Optifatima en Alcobendas"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       2 · BRUNO — quién te atiende
+       ==================================================== -->
+  <section id="bruno" class="section section--verde">
+    <div class="container">
+      <div class="bruno__grid">
+        <div class="bruno__image">
+          <!-- TODO: foto profesional de Bruno -->
+          <img
+            src="/images/bruno-placeholder.jpg"
+            alt="Bruno Martín Tamayo, propietario de Optifatima"
+            loading="lazy"
+          />
+        </div>
+        <div class="bruno__content">
+          <span class="eyebrow">Quién te atiende</span>
+          <h2>{negocio.profesional.nombre}</h2>
+          <p class="bruno__titulaciones">
+            {negocio.profesional.titulaciones.join(' · ')}
+          </p>
+          <p>
+            Más de 25 años en el sector óptico, con paso por la dirección de
+            las principales cadenas del país antes de dedicarse a Optifatima.
+          </p>
+          <ul class="bruno__trayectoria">
+            {negocio.profesional.trayectoria.map((t) => (
+              <li>
+                <strong>{t.empresa}</strong>
+                <span>{t.rol}</span>
+              </li>
+            ))}
+          </ul>
+          <p>
+            Esa trayectoria, aplicada a una óptica familiar de Alcobendas donde
+            te atiende él mismo de principio a fin. Sin pasarte de mostrador en
+            mostrador. Sin perder el hilo entre cita y cita.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       3 · SERVICIOS GENERALES
+       ==================================================== -->
+  <section id="servicios" class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Qué ofrecemos</span>
+        <h2>Todo lo que necesitas para cuidar tu <em>visión</em></h2>
+        <p>
+          Desde la revisión visual gratuita hasta la adaptación de lentes especiales.
+          Un servicio completo, sin prisa y con la atención que mereces.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        {servicios_generales.map((s) => (
+          <article class="card">
+            <h3>{s.titulo}</h3>
+            <p>{s.descripcion}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       4 · ESPECIALIDADES (las 7 long-tail)
+       ==================================================== -->
+  <section id="especialidades" class="section section--crema-claro">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">En lo que destacamos</span>
+        <h2>Siete especialidades que nos <em>distinguen</em></h2>
+        <p>
+          Más allá de vender gafas, nos especializamos en los casos donde el
+          conocimiento técnico marca toda la diferencia. Cada especialidad tiene
+          su página propia con la información completa.
+        </p>
+      </div>
+
+      <div class="especialidades-grid">
+        {especialidades.map((esp) => (
+          <a href={`/${esp.slug}`} class="especialidad-card">
+            <h3>{esp.titulo_corto}</h3>
+            <p>{esp.hero.subtitulo}</p>
+            <span class="especialidad-card__link">Saber más →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       5 · MARCAS
+       ==================================================== -->
+  <section id="marcas" class="section">
+    <div class="container container--narrow">
+      <div class="section-header section-header--center">
+        <span class="eyebrow">Catálogo</span>
+        <h2>Trabajamos con <em>primeras marcas</em></h2>
+        <p>
+          Selección curada de marcas premium e independientes. Desde clásicos
+          atemporales hasta diseño contemporáneo. Pásate por la tienda para
+          ver el catálogo completo.
+        </p>
+      </div>
+      <!--
+        NOTA: hasta que Bruno valide el listado nominal completo,
+        mantenemos visualización genérica. Cuando esté confirmado,
+        sustituir este placeholder por logos reales en una grid.
+      -->
+      <p class="marcas-placeholder">
+        <em>Listado de marcas pendiente de validación con Bruno.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       6 · PROCESO
+       ==================================================== -->
+  <section class="section section--crema-claro">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Así trabajamos</span>
+        <h2>Un proceso <em>pensado</em> para ti</h2>
+      </div>
+      <div class="proceso-grid">
+        <div class="proceso-step">
+          <span class="proceso-step__num">01</span>
+          <h3>Pide tu cita</h3>
+          <p>Por teléfono o WhatsApp. Nos adaptamos a tu horario.</p>
+        </div>
+        <div class="proceso-step">
+          <span class="proceso-step__num">02</span>
+          <h3>Revisión completa</h3>
+          <p>Examen visual de 30 minutos. Te explicamos todo, sin tecnicismos.</p>
+        </div>
+        <div class="proceso-step">
+          <span class="proceso-step__num">03</span>
+          <h3>Elige con calma</h3>
+          <p>Te asesoramos en monturas, lentes y tratamientos. Sin presión.</p>
+        </div>
+        <div class="proceso-step">
+          <span class="proceso-step__num">04</span>
+          <h3>Entrega y ajuste</h3>
+          <p>Gafas listas en 48-72 h. Con garantía de 3 años y ajustes incluidos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       7 · RESEÑAS
+       ==================================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Lo que dicen nuestros clientes</span>
+        <h2>{negocio.resenas.rating}★ con {negocio.resenas.total} reseñas en <em>Google</em></h2>
+        <p>No lo decimos nosotros, lo dicen quienes ya confiaron en Optifatima.</p>
+      </div>
+      <!--
+        TODO: extraer 3 reseñas reales del GBP de Optifatima
+        (con permiso del cliente o anonimizadas) para sustituir
+        este placeholder antes de publicar v1.0.
+      -->
+      <p class="marcas-placeholder">
+        <em>Bloque de reseñas pendiente. Extraer 3 reseñas reales del Google Business Profile antes de publicar.</em>
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================
+       8 · CONTACTO + MAPA
+       ==================================================== -->
+  <ContactoBlock />
+
+  <!-- ====================================================
+       9 · FAQ
+       ==================================================== -->
+  <section class="section">
+    <div class="container container--narrow">
+      <div class="section-header">
+        <span class="eyebrow">Preguntas frecuentes</span>
+        <h2>Todo lo que quieras <em>saber</em></h2>
+      </div>
+      <div class="faq-list">
+        {faq_general.map((item) => (
+          <details class="faq-item">
+            <summary>{item.pregunta}</summary>
+            <p>{item.respuesta}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* ---- HERO ---- */
+  .hero {
+    padding: var(--space-12) 0 var(--space-16);
+  }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero__grid { grid-template-columns: 1.1fr 1fr; gap: var(--space-10); }
+  }
+  .hero__lead {
+    font-size: var(--text-lg);
+    color: var(--color-verde-medio);
+    margin: var(--space-5) 0 var(--space-6);
+    max-width: 50ch;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
+  .hero__stats {
+    display: flex;
+    gap: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-crema-oscuro);
+    flex-wrap: wrap;
+  }
+  .hero__stats > div {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero__stat-num {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    color: var(--color-terracota);
+    line-height: 1;
+  }
+  .hero__stat-lbl {
+    font-size: var(--text-xs);
+    color: var(--color-verde-medio);
+    margin-top: var(--space-1);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .hero__image img {
+    border-radius: var(--radius-lg);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  /* ---- BRUNO ---- */
+  .bruno__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .bruno__grid { grid-template-columns: 1fr 1.3fr; gap: var(--space-10); }
+  }
+  .bruno__image img {
+    border-radius: var(--radius-lg);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: brightness(1.05) contrast(1.08) saturate(1.12) sepia(0.05);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  }
+  }
+  .bruno__titulaciones {
+    font-family: var(--font-body);
+    color: var(--color-terracota);
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-5);
+  }
+  .bruno__trayectoria {
+    list-style: none;
+    margin: var(--space-5) 0;
+    border-left: 2px solid var(--color-terracota);
+    padding-left: var(--space-5);
+  }
+  .bruno__trayectoria li {
+    margin-bottom: var(--space-3);
+    color: var(--color-crema);
+  }
+  .bruno__trayectoria strong {
+    display: block;
+    font-weight: 600;
+    color: var(--color-crema);
+  }
+  .bruno__trayectoria span {
+    font-size: var(--text-sm);
+    color: var(--color-crema-oscuro);
+    opacity: 0.8;
+  }
+
+  /* ---- SECTION HEADERS ---- */
+  .section-header {
+    max-width: 720px;
+    margin-bottom: var(--space-10);
+  }
+  .section-header--center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .section-header h2 {
+    margin-bottom: var(--space-4);
+  }
+  .section-header p {
+    font-size: var(--text-lg);
+    color: var(--color-verde-medio);
+  }
+
+  /* ---- ESPECIALIDADES GRID ---- */
+  .especialidades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-5);
+  }
+  .especialidad-card {
+    background: var(--color-blanco);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition), box-shadow var(--transition);
+    color: inherit;
+  }
+  .especialidad-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(31, 53, 48, 0.08);
+  }
+  .especialidad-card h3 {
+    margin-bottom: var(--space-3);
+  }
+  .especialidad-card p {
+    flex: 1;
+    color: var(--color-verde-medio);
+    margin-bottom: var(--space-4);
+    font-size: var(--text-base);
+  }
+  .especialidad-card__link {
+    color: var(--color-terracota);
+    font-weight: 500;
+    font-size: var(--text-sm);
+  }
+
+  /* ---- MARCAS / RESEÑAS PLACEHOLDER ---- */
+  .marcas-placeholder {
+    text-align: center;
+    color: var(--color-gris-suave);
+    font-size: var(--text-base);
+    padding: var(--space-8);
+    background: var(--color-crema-claro);
+    border: 1px dashed var(--color-crema-oscuro);
+    border-radius: var(--radius-lg);
+  }
+
+  /* ---- PROCESO ---- */
+  .proceso-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-6);
+  }
+  .proceso-step__num {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+    color: var(--color-terracota);
+    line-height: 1;
+    display: block;
+    margin-bottom: var(--space-3);
+  }
+  .proceso-step h3 { margin-bottom: var(--space-2); }
+  .proceso-step p { color: var(--color-verde-medio); }
+
+  /* ---- FAQ ---- */
+  .faq-list {
+    margin-top: var(--space-4);
+  }
+</style>

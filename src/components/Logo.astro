@@ -1,0 +1,52 @@
+---
+interface Props {
+  variant?: 'header' | 'footer';
+  size?: number;
+}
+
+const { variant = 'header', size = 28 } = Astro.props;
+
+const colors = variant === 'header'
+  ? {
+      ringStroke: 'var(--color-terracota)',
+      iris: 'var(--color-terracota)',
+      pupil: 'var(--color-verde-prof)',
+      highlight: 'var(--color-crema)',
+    }
+  : {
+      ringStroke: 'var(--color-terracota)',
+      iris: 'var(--color-terracota)',
+      pupil: 'var(--color-crema)',
+      highlight: 'var(--color-crema)',
+    };
+---
+
+<svg
+  viewBox="0 0 64 64"
+  width={size}
+  height={size}
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  aria-hidden="true"
+  class="optifatima-logo"
+>
+  <ellipse
+    cx="32"
+    cy="32"
+    rx="22"
+    ry="13"
+    stroke={colors.ringStroke}
+    stroke-width="3.5"
+    fill="none"
+  />
+  <circle cx="32" cy="32" r="8" fill={colors.iris} />
+  <circle cx="32" cy="32" r="4" fill={colors.pupil} />
+  <circle cx="34" cy="30" r="1.5" fill={colors.highlight} />
+</svg>
+
+<style>
+  .optifatima-logo {
+    flex-shrink: 0;
+    display: block;
+  }
+</style>

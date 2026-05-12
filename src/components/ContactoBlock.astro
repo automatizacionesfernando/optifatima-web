@@ -1,0 +1,166 @@
+---
+// ============================================================
+// COMPONENTE · ContactoBlock
+// ============================================================
+// Bloque reutilizable en home + 7 sub-páginas. Renderiza
+// dirección, teléfono, WhatsApp, email, horarios y embed
+// del mapa de Google.
+// ============================================================
+import { negocio } from '../data/negocio.js';
+
+interface Props {
+  /** ID para anchor links (#contacto en la home, #contacto-audifonos en sub-páginas, etc.) */
+  id?: string;
+  /** Título personalizado de la sección */
+  titulo?: string;
+}
+
+const {
+  id = 'contacto',
+  titulo = 'En el corazón de Alcobendas',
+} = Astro.props;
+---
+
+<section id={id} class="section contacto-block">
+  <div class="container">
+    <div class="contacto-block__grid">
+
+      <!-- Columna izquierda: datos -->
+      <div class="contacto-block__info">
+        <span class="eyebrow">Visítanos</span>
+        <h2>
+          {titulo.split('Alcobendas')[0]}<em>Alcobendas</em>{titulo.split('Alcobendas')[1] || ''}
+        </h2>
+
+        <div class="contacto-block__detalles">
+          <div>
+            <h4>Dirección</h4>
+            <p>
+              {negocio.direccion.calle}<br/>
+              {negocio.direccion.cp} {negocio.direccion.ciudad}, {negocio.direccion.provincia}
+            </p>
+          </div>
+
+          <div>
+            <h4>Teléfono</h4>
+            <p>
+              <a href={`tel:${negocio.telefono_internacional}`}>{negocio.telefono}</a>
+            </p>
+          </div>
+
+          <div>
+            <h4>WhatsApp</h4>
+            <p>
+              <a
+                href={`https://wa.me/${negocio.whatsapp.replace('+','')}?text=Hola,%20me%20gustaría%20pedir%20cita`}
+                target="_blank"
+                rel="noopener"
+              >
+                {negocio.whatsapp_display}
+              </a>
+            </p>
+          </div>
+
+          <div>
+            <h4>Email</h4>
+            <p><a href={`mailto:${negocio.email}`}>{negocio.email}</a></p>
+          </div>
+
+          <div class="contacto-block__horarios">
+            <h4>Horarios</h4>
+            <p>
+              Lunes a Viernes · {negocio.horarios.lunes_viernes}<br/>
+              Sábados · {negocio.horarios.sabados}<br/>
+              Domingos · {negocio.horarios.domingos}<br/>
+              Festivos · {negocio.horarios.festivos}
+            </p>
+          </div>
+        </div>
+
+        <div class="contacto-block__cta">
+          <a href={`tel:${negocio.telefono_internacional}`} class="btn btn--primary">
+            Llamar ahora
+          </a>
+          <a
+            href={`https://wa.me/${negocio.whatsapp.replace('+','')}?text=Hola,%20me%20gustaría%20pedir%20cita`}
+            class="btn btn--ghost"
+            target="_blank"
+            rel="noopener"
+          >
+            Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna derecha: mapa -->
+      <div class="contacto-block__mapa">
+        <iframe
+          src={`https://www.google.com/maps?q=${encodeURIComponent(negocio.direccion.formato_corto)}&output=embed`}
+          width="100%"
+          height="500"
+          style="border:0; border-radius: var(--radius-lg);"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación de Optifatima en Alcobendas"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contacto-block {
+    background: var(--color-crema-claro);
+  }
+  .contacto-block__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .contacto-block__grid {
+      grid-template-columns: 1fr 1.2fr;
+      gap: var(--space-10);
+    }
+  }
+
+  .contacto-block__info h2 {
+    margin-bottom: var(--space-6);
+  }
+
+  .contacto-block__detalles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+    margin-bottom: var(--space-6);
+  }
+  .contacto-block__horarios {
+    grid-column: 1 / -1;
+  }
+
+  .contacto-block__detalles h4 {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-terracota);
+    margin-bottom: var(--space-2);
+  }
+  .contacto-block__detalles p {
+    font-size: var(--text-base);
+    color: var(--color-verde-medio);
+    margin: 0;
+  }
+  .contacto-block__detalles a:hover {
+    color: var(--color-terracota);
+  }
+
+  .contacto-block__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+</style>
