@@ -14,16 +14,35 @@
    2 · VARIABLES CSS — design tokens
    ------------------------------------------------------------- */
 :root {
-  /* Paleta principal */
-  --color-crema:        #F5EFE6;  /* fondo principal */
-  --color-crema-claro:  #FAF6EF;  /* secciones alternas */
-  --color-crema-oscuro: #E8DFD0;  /* bordes sutiles, separadores */
-  --color-terracota:    #B5532A;  /* acento principal, CTAs */
-  --color-terracota-osc:#8C3F1E;  /* hover, énfasis */
-  --color-verde-prof:   #1F3530;  /* textos principales, navegación */
-  --color-verde-medio:  #4A5D55;  /* textos secundarios */
-  --color-tinta:        #1A1A1A;  /* negro casi puro para títulos */
-  --color-gris-suave:   #6B6B6B;  /* texto auxiliar */
+  /* Paleta Optifatima — derivada del logo y del cartel del local */
+  --color-text-body:      #1A1A1A;  /* negro grafito, cuerpo de texto */
+  --color-text-secondary: #6B7280;  /* gris medio, metadatos y captions */
+  --color-accent:         #2B6CB0;  /* azul medio profesional, enlaces y CTAs */
+  --color-accent-hover:   #22568A;  /* azul más oscuro para hover */
+  --color-heading:        #1A1A1A;  /* títulos en negro grafito */
+  --color-bg:             #FFFFFF;
+  --color-bg-soft:        #F7F8FA;
+  --color-border:         #E5E7EB;
+
+  /* Bandas de marca (header, footer, secciones que antes eran crema) */
+  --color-banda-bg:       #FF3D33;  /* escarlata neón, eléctrico */
+  --color-banda-text:     #FFFFFF;  /* blanco puro para legibilidad sobre rojo claro */
+
+  /* Sección "Quién te atiende" (foto de Bruno) */
+  --color-bruno-bg:       #A8C9E0;  /* azul pastel inspirado en su camisa */
+
+  /* Paleta cookbook — alias por compatibilidad.
+     --color-terracota se redirige al azul de marca para unificar todos
+     los acentos (eyebrows, números, hovers, botones) sin tocar cada selector. */
+  --color-crema:        #F5EFE6;
+  --color-crema-claro:  #FAF6EF;
+  --color-crema-oscuro: #E8DFD0;
+  --color-terracota:    #2B6CB0;   /* ahora alias de --color-accent */
+  --color-terracota-osc:#22568A;   /* ahora alias de --color-accent-hover */
+  --color-verde-prof:   #1F3530;
+  --color-verde-medio:  #4A5D55;
+  --color-tinta:        #1A1A1A;
+  --color-gris-suave:   #6B6B6B;
   --color-blanco:       #FFFFFF;
 
   /* Tipografía */
@@ -81,15 +100,24 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: 1.6;
-  color: var(--color-verde-prof);
-  background: var(--color-crema);
+  color: var(--color-text-body);
+  background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 img, video { max-width: 100%; height: auto; display: block; }
 button { font: inherit; cursor: pointer; border: none; background: none; }
-a { color: inherit; text-decoration: none; transition: color var(--transition); }
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+a:hover { color: var(--color-accent-hover); }
+
+.text-secondary, small, .caption {
+  color: var(--color-text-secondary);
+}
 
 /* -------------------------------------------------------------
    4 · TIPOGRAFÍA
@@ -98,7 +126,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 400;
   line-height: 1.1;
-  color: var(--color-tinta);
+  color: var(--color-heading);
   letter-spacing: -0.02em;
 }
 
@@ -133,11 +161,44 @@ p { margin-bottom: var(--space-4); max-width: 65ch; }
 .section--tight { padding: var(--space-10) 0; }
 .section--loose { padding: var(--space-16) 0; }
 
-.section--crema-claro { background: var(--color-crema-claro); }
-.section--verde       { background: var(--color-verde-prof); color: var(--color-crema); }
+.section--crema-claro {
+  background: var(--color-banda-bg);
+  color: var(--color-banda-text);
+}
+.section--crema-claro h1,
+.section--crema-claro h2,
+.section--crema-claro h3,
+.section--crema-claro h4,
+.section--crema-claro h5,
+.section--crema-claro h6 { color: var(--color-banda-text); }
+.section--crema-claro a { color: var(--color-banda-text); }
+.section--crema-claro .eyebrow { color: var(--color-banda-text); opacity: 0.85; }
+
+/* Párrafos sobre la banda roja: !important porque las reglas scoped
+   de index.astro / audifonos.astro tienen mayor especificidad */
+.section--crema-claro .section-header p,
+.section--crema-claro .proceso-step p,
+.section--crema-claro .proceso-step__num { color: var(--color-banda-text) !important; }
+
+/* Cards con fondo propio blanco: texto normal (grafito sobre blanco) */
+.section--crema-claro .card,
+.section--crema-claro .especialidad-card { color: var(--color-text-body); }
+.section--crema-claro .card h1, .section--crema-claro .card h2, .section--crema-claro .card h3,
+.section--crema-claro .card h4, .section--crema-claro .card h5, .section--crema-claro .card h6,
+.section--crema-claro .especialidad-card h1,
+.section--crema-claro .especialidad-card h2,
+.section--crema-claro .especialidad-card h3,
+.section--crema-claro .especialidad-card h4,
+.section--crema-claro .especialidad-card h5,
+.section--crema-claro .especialidad-card h6 { color: var(--color-heading); }
+.section--crema-claro .card p,
+.section--crema-claro .especialidad-card p { color: var(--color-text-body) !important; }
+.section--crema-claro .card a { color: var(--color-accent); }
+
+.section--verde       { background: var(--color-bruno-bg); color: var(--color-text-body); }
 .section--verde h1,
 .section--verde h2,
-.section--verde h3 { color: var(--color-crema); }
+.section--verde h3 { color: var(--color-text-body); }
 
 /* -------------------------------------------------------------
    6 · "EYEBROW" — pequeño texto sobre los títulos
@@ -170,11 +231,11 @@ p { margin-bottom: var(--space-4); max-width: 65ch; }
   cursor: pointer;
 }
 .btn--primary {
-  background: var(--color-terracota);
-  color: var(--color-crema);
+  background: var(--color-accent);
+  color: var(--color-blanco);
 }
 .btn--primary:hover {
-  background: var(--color-terracota-osc);
+  background: var(--color-accent-hover);
   transform: translateY(-1px);
 }
 .btn--ghost {

@@ -1,13 +1,15 @@
 ---
 import { negocio } from '../data/negocio.js';
-import Logo from './Logo.astro';
 ---
 
 <header class="site-header">
   <div class="container container--wide site-header__inner">
     <a href={import.meta.env.BASE_URL} class="site-header__logo">
-      <Logo variant="header" size={28} />
-      <span>Opti<em>fatima</em></span>
+      <img
+        src={`${import.meta.env.BASE_URL}logo-optifatima.png`}
+        alt="Optifatima — Óptica y audiología en Alcobendas"
+        style="height: 72px; width: auto;"
+      />
     </a>
 
     <nav class="site-header__nav" aria-label="Navegación principal">
@@ -34,8 +36,8 @@ import Logo from './Logo.astro';
     position: sticky;
     top: 0;
     z-index: 100;
-    background: var(--color-crema);
-    border-bottom: 1px solid var(--color-crema-oscuro);
+    background: var(--color-banda-bg);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     backdrop-filter: blur(8px);
   }
   .site-header__inner {
@@ -52,11 +54,11 @@ import Logo from './Logo.astro';
     font-family: var(--font-display);
     font-size: var(--text-xl);
     font-weight: 500;
-    color: var(--color-verde-prof);
+    color: var(--color-banda-text);
     letter-spacing: -0.02em;
   }
   .site-header__logo em {
-    color: var(--color-terracota);
+    color: var(--color-banda-text);
     font-style: italic;
   }
   .site-header__nav {
@@ -64,9 +66,10 @@ import Logo from './Logo.astro';
     gap: var(--space-6);
     font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--color-verde-prof);
+    color: var(--color-banda-text);
   }
-  .site-header__nav a:hover { color: var(--color-terracota); }
+  .site-header__nav a { color: var(--color-banda-text); }
+  .site-header__nav a:hover { color: var(--color-banda-text); opacity: 0.75; }
   .site-header__actions {
     display: flex;
     align-items: center;
@@ -75,9 +78,9 @@ import Logo from './Logo.astro';
   .site-header__phone {
     display: none;
     font-weight: 600;
-    color: var(--color-verde-prof);
+    color: var(--color-banda-text);
   }
-  .site-header__phone:hover { color: var(--color-terracota); }
+  .site-header__phone:hover { color: var(--color-banda-text); opacity: 0.75; }
   .site-header__cta {
     padding: var(--space-3) var(--space-5);
     font-size: var(--text-sm);
