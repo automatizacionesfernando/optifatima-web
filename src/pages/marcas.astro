@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { marcasPorCategoria, totalMarcas } from '../data/marcas.js';
+
+const grupos = marcasPorCategoria();
+
+const titulo = `Marcas de gafas en Alcobendas — Optifatima`;
+const descripcion = `Trabajamos con ${totalMarcas} marcas de gafas y monturas en Optifatima, Alcobendas: lujo, diseño, deportivas, clásicas, casual e infantil. Desde Chanel y Tom Ford hasta Ray-Ban, Oakley y Mykita.`;
+---
+
+<BaseLayout title={titulo} description={descripcion}>
+  <main class="pagina-marcas">
+    <header class="pagina-marcas__header">
+      <h1>Marcas que trabajamos</h1>
+      <p class="text-secondary">
+        En Optifatima encontrarás {totalMarcas} marcas seleccionadas,
+        desde firmas de lujo internacionales hasta opciones deportivas,
+        casuales e infantiles. Todas con garantía y atención
+        personalizada por Bruno, óptico-optometrista y audioprotesista.
+      </p>
+    </header>
+
+    {grupos.map((grupo) => grupo.marcas.length > 0 && (
+      <section class="pagina-marcas__categoria" aria-labelledby={`cat-${grupo.key}`}>
+        <h2 id={`cat-${grupo.key}`}>{grupo.label}</h2>
+        <ul class="pagina-marcas__grid">
+          {grupo.marcas.map((marca) => (
+            <li class="pagina-marcas__item">{marca.nombre}</li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <footer class="pagina-marcas__cta">
+      <h2>¿Buscas una marca concreta?</h2>
+      <p>
+        Si no ves aquí la marca que te interesa, pregúntanos:
+        muchas marcas las traemos por encargo en 48-72 horas.
+      </p>
+      <a href={`${import.meta.env.BASE_URL}#contacto`} class="boton-primario">Contactar con Optifatima</a>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .pagina-marcas {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  .pagina-marcas__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .pagina-marcas__header h1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    margin: 0 0 1rem;
+  }
+
+  .pagina-marcas__header p {
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+
+  .pagina-marcas__categoria {
+    margin-bottom: 2.5rem;
+  }
+
+  .pagina-marcas__categoria h2 {
+    font-size: 1.375rem;
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .pagina-marcas__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .pagina-marcas__item {
+    padding: 1rem 1.25rem;
+    background: var(--color-bg-soft);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font-weight: 500;
+    color: var(--color-text-body);
+    transition: all 0.2s ease;
+  }
+
+  .pagina-marcas__item:hover {
+    border-color: var(--color-accent);
+    background: var(--color-bg);
+  }
+
+  .pagina-marcas__cta {
+    margin-top: 4rem;
+    padding: 2.5rem;
+    background: var(--color-bg-soft);
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .pagina-marcas__cta h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.5rem;
+    border: none;
+    color: var(--color-text-body);
+  }
+
+  .pagina-marcas__cta p {
+    max-width: 540px;
+    margin: 0 auto 1.5rem;
+    color: var(--color-text-secondary);
+  }
+
+  .boton-primario {
+    display: inline-block;
+    padding: 0.875rem 1.75rem;
+    background: var(--color-accent);
+    color: white !important;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s ease;
+  }
+
+  .boton-primario:hover {
+    background: var(--color-accent-hover);
+  }
+</style>

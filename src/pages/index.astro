@@ -4,6 +4,7 @@
 // ============================================================
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactoBlock from '../components/ContactoBlock.astro';
+import CarruselMarcas from '../components/CarruselMarcas.astro';
 import { negocio } from '../data/negocio.js';
 import { especialidades, servicios_generales } from '../data/especialidades.js';
 import { faq_general } from '../data/faq.js';
@@ -160,29 +161,9 @@ import { faq_general } from '../data/faq.js';
   </section>
 
   <!-- ====================================================
-       5 · MARCAS
+       5 · MARCAS — carrusel autoplay con 28 marcas validadas
        ==================================================== -->
-  <section id="marcas" class="section">
-    <div class="container container--narrow">
-      <div class="section-header section-header--center">
-        <span class="eyebrow">Catálogo</span>
-        <h2>Trabajamos con <em>primeras marcas</em></h2>
-        <p>
-          Selección curada de marcas premium e independientes. Desde clásicos
-          atemporales hasta diseño contemporáneo. Pásate por la tienda para
-          ver el catálogo completo.
-        </p>
-      </div>
-      <!--
-        NOTA: hasta que Bruno valide el listado nominal completo,
-        mantenemos visualización genérica. Cuando esté confirmado,
-        sustituir este placeholder por logos reales en una grid.
-      -->
-      <p class="marcas-placeholder">
-        <em>Listado de marcas pendiente de validación con Bruno.</em>
-      </p>
-    </div>
-  </section>
+  <CarruselMarcas />
 
   <!-- ====================================================
        6 · PROCESO

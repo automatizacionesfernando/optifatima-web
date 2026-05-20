@@ -1,0 +1,139 @@
+---
+// src/components/CarruselMarcas.astro
+import { marcas } from '../data/marcas.js';
+
+// Duplicamos el array para que el loop sea infinito y suave
+const marcasDuplicadas = [...marcas, ...marcas];
+---
+
+<section id="marcas" class="carrusel-marcas" aria-label="Marcas que trabajamos en Optifatima">
+  <div class="carrusel-marcas__intro">
+    <h2>Trabajamos con las mejores marcas</h2>
+    <p class="text-secondary">
+      Más de 28 marcas seleccionadas, desde lujo hasta deportivas e infantiles.
+      <a href={`${import.meta.env.BASE_URL}marcas`}>Ver todas las marcas →</a>
+    </p>
+  </div>
+
+  <div class="carrusel-marcas__viewport">
+    <div class="carrusel-marcas__track">
+      {marcasDuplicadas.map((marca) => (
+        <div class="carrusel-marcas__item" aria-hidden={false}>
+          <span class="carrusel-marcas__nombre">{marca.nombre}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .carrusel-marcas {
+    padding: 4rem 0;
+    background: var(--color-bg-soft);
+    overflow: hidden;
+  }
+
+  .carrusel-marcas__intro {
+    max-width: 800px;
+    margin: 0 auto 2.5rem;
+    padding: 0 1.5rem;
+    text-align: center;
+  }
+
+  .carrusel-marcas__intro h2 {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .carrusel-marcas__intro p {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .carrusel-marcas__viewport {
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 80px,
+      black calc(100% - 80px),
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      black 80px,
+      black calc(100% - 80px),
+      transparent 100%
+    );
+  }
+
+  .carrusel-marcas__track {
+    display: flex;
+    gap: 1.25rem;
+    width: max-content;
+    animation: scroll-marcas 60s linear infinite;
+  }
+
+  .carrusel-marcas__track:hover {
+    animation-play-state: paused;
+  }
+
+  .carrusel-marcas__item {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    height: 80px;
+    padding: 0 1.75rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .carrusel-marcas__item:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .carrusel-marcas__nombre {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--color-text-body);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  @keyframes scroll-marcas {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-50% - 0.625rem)); }
+  }
+
+  /* Accesibilidad: respetar prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .carrusel-marcas__track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+    .carrusel-marcas__viewport {
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .carrusel-marcas__item {
+      min-width: 140px;
+      height: 70px;
+      padding: 0 1.25rem;
+    }
+    .carrusel-marcas__nombre {
+      font-size: 1rem;
+    }
+  }
+</style>
