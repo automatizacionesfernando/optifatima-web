@@ -35,9 +35,8 @@ const {
         <div class="contacto-block__detalles">
           <div>
             <h4>Dirección</h4>
-            <p>
-              {negocio.direccion.calle}<br/>
-              {negocio.direccion.cp} {negocio.direccion.ciudad}, {negocio.direccion.provincia}
+            <p class="contacto-dir">
+              {negocio.direccion.calle}, {negocio.direccion.cp} {negocio.direccion.ciudad}, {negocio.direccion.provincia}
             </p>
           </div>
 
@@ -162,5 +161,16 @@ const {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
+  }
+
+  .contacto-dir {
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+    font-size: clamp(0.9rem, 3.2vw, 1rem);
+  }
+
+  @media (max-width: 540px) {
+    .contacto-block__detalles { grid-template-columns: 1fr; }
   }
 </style>
