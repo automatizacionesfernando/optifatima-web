@@ -334,6 +334,6 @@ export const servicios_generales = [
   },
   {
     titulo: "Financiación",
-    descripcion: "Hasta 12 meses sin intereses para que la solución correcta no dependa del presupuesto del mes.",
+    descripcion: "Hasta 24 meses sin intereses para que la solución correcta no dependa del presupuesto del mes.",
   },
 ];

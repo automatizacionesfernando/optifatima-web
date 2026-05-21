@@ -25,7 +25,7 @@ export const faq_general = [
   {
     pregunta: "¿Ofrecéis financiación?",
     respuesta:
-      "Sí, ofrecemos financiación al 0 % de interés hasta 12 meses. Para compras mayores tenemos opciones con plazos más amplios. Te hacemos un plan a medida en tienda, sin compromiso.",
+      "Sí, ofrecemos financiación al 0 % de interés hasta 24 meses. Para compras mayores tenemos opciones con plazos más amplios. Te hacemos un plan a medida en tienda, sin compromiso.",
   },
   {
     pregunta: "¿Qué incluye la garantía?",
