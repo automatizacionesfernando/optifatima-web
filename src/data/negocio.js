@@ -33,9 +33,8 @@ export const negocio = {
   },
 
   // Horarios — Bruno trabaja solo, cierra sábados, domingos y festivos
-  // ⚠️ HORARIOS L-V POR CONFIRMAR CON BRUNO (estos son típicos del sector)
   horarios: {
-    lunes_viernes: "10:00 — 14:00 y 17:00 — 20:30", // POR CONFIRMAR
+    lunes_viernes: "11:00 — 14:00 y 17:45 — 20:00",
     sabados: "Cerrado",
     domingos: "Cerrado",
     festivos: "Cerrado",
@@ -51,11 +50,17 @@ export const negocio = {
     ],
     años_experiencia: 25,
     trayectoria: [
-      { empresa: "Alain Afflelou",   rol: "Director" },
-      { empresa: "General Óptica",   rol: "Director" },
-      { empresa: "Visionlab",        rol: "Director" },
-      { empresa: "Óptica 2000",      rol: "Director" },
-      { empresa: "Lenticon",         rol: "Director técnico" },
+      { empresa: "Ópticas Carrefour", ubicacion: "Las Rozas",          rol: "Óptico adjunto de tienda" },
+      { empresa: "Alain Afflelou",    ubicacion: "Las Rozas",          rol: "Responsable y gestión de óptica" },
+      { empresa: "Óptica 2000",       ubicacion: "Pozuelo de Alarcón", rol: "Responsable y gestor de óptica y audiología" },
+      { empresa: "Visionlab",         ubicacion: "Torrelodones",       rol: "Responsable de tienda" },
+      { empresa: "General Óptica",    ubicacion: "Palma de Mallorca",  rol: "Director general y gestor de tiendas en Mallorca" },
+      {
+        empresa: "Lenticon",
+        ubicacion: "Tres Cantos",
+        rol: "Director técnico y docente",
+        detalle: "Formación a ópticos y oftalmólogos en ortoqueratología avanzada y ectasias corneales, impartida en clínicas oftalmológicas de Madrid (Clínica Coro, Lasik Center, Novovisión).",
+      },
     ],
     estudios_avanzados: [
       "Baja visión",
