@@ -87,14 +87,19 @@ import { faq_general } from '../data/faq.js';
             {negocio.profesional.titulaciones.join(' · ')}
           </p>
           <p>
-            Más de 25 años en el sector óptico, con paso por la dirección de
-            las principales cadenas del país antes de dedicarse a Optifatima.
+            Más de 25 años de trayectoria en el sector óptico y audiológico, primero
+            como óptico de tienda, después al frente de la gestión y la dirección en
+            algunas de las principales cadenas, y hoy dedicado a su propia óptica en
+            Alcobendas. En Lenticon ejerció además como director técnico y docente,
+            formando a ópticos y oftalmólogos en ortoqueratología avanzada y ectasias
+            corneales para clínicas de referencia en Madrid.
           </p>
           <ul class="bruno__trayectoria">
             {negocio.profesional.trayectoria.map((t) => (
               <li>
-                <strong>{t.empresa}</strong>
+                <strong>{t.empresa} <em class="bruno__ubicacion">({t.ubicacion})</em></strong>
                 <span>{t.rol}</span>
+                {t.detalle && <span class="bruno__detalle">{t.detalle}</span>}
               </li>
             ))}
           </ul>
@@ -338,17 +343,30 @@ import { faq_general } from '../data/faq.js';
   }
   .bruno__trayectoria li {
     margin-bottom: var(--space-3);
-    color: var(--color-crema);
+    color: var(--color-verde-prof);
   }
   .bruno__trayectoria strong {
     display: block;
     font-weight: 600;
-    color: var(--color-crema);
+    color: var(--color-verde-prof);
   }
   .bruno__trayectoria span {
     font-size: var(--text-sm);
-    color: var(--color-crema-oscuro);
+    color: var(--color-verde-medio);
+  }
+  .bruno__ubicacion {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--color-verde-medio);
+    opacity: 0.85;
+  }
+  .bruno__detalle {
+    display: block;
+    margin-top: var(--space-1);
+    font-size: var(--text-xs);
+    color: var(--color-verde-medio);
     opacity: 0.8;
+    line-height: 1.5;
   }
 
   /* ---- SECTION HEADERS ---- */
