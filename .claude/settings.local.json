@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(npm run *)",
-      "PowerShell(Stop-Process -Name node -Force -ErrorAction SilentlyContinue)"
+      "PowerShell(Stop-Process -Name node -Force -ErrorAction SilentlyContinue)",
+      "Bash(git commit -m ' *)",
+      "PowerShell(cd \"c:\\\\Users\\\\USUARIO\\\\OneDrive\\\\Desktop\\\\proyectos\\\\optifatima\\\\optifatima-web\"; $size = \\(Get-ChildItem -Recurse dist | Measure-Object -Property Length -Sum\\).Sum; Write-Output \"$\\([math]::Round\\($size/1MB,2\\)\\) MB\")"
     ]
   }
 }
