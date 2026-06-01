@@ -1,10 +1,10 @@
 ---
 // ============================================================
-// PÁGINA · /audifonos-alcobendas
+// PÁGINA DINÁMICA · /[slug]  (las 7 especialidades long-tail)
 // ============================================================
-// Sub-página piloto. Patrón replicable para las otras 6
-// especialidades long-tail. La estructura se mantiene; solo
-// cambian los datos importados de especialidades.js.
+// Genera una página por cada objeto de especialidades.js.
+// Fuente única de maquetación: editar aquí cambia las 7 páginas.
+// El contenido de cada especialidad vive en src/data/especialidades.js.
 // ============================================================
 
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -12,33 +12,31 @@ import ContactoBlock from '../components/ContactoBlock.astro';
 import { negocio } from '../data/negocio.js';
 import { especialidades } from '../data/especialidades.js';
 
-const esp = especialidades.find((e) => e.slug === 'audifonos-alcobendas');
-if (!esp) throw new Error('Especialidad audifonos no encontrada');
+export function getStaticPaths() {
+  return especialidades.map((esp) => ({
+    params: { slug: esp.slug },
+    props: { esp },
+  }));
+}
 
-// Schema.org específico de audiología (extiende el LocalBusiness base)
-const schemaExtra = {
-  '@type': ['HearingAidStore', 'LocalBusiness'],
-  makesOffer: [
-    {
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'Service',
-        name: 'Adaptación de audífonos',
-        description: 'Adaptación personalizada de audífonos por Técnico Superior en Audiología Protésica.',
-        areaServed: 'Alcobendas',
-      },
-    },
-    {
-      '@type': 'Offer',
-      itemOffered: {
-        '@type': 'Service',
-        name: 'Reparación de audífonos en 24 horas',
-        description: 'Servicio técnico propio. Reparación de audífonos en 24 horas en Alcobendas.',
-        areaServed: 'Alcobendas',
-      },
-    },
-  ],
-};
+const { esp } = Astro.props;
+
+// Schema.org: si la especialidad declara tipo/ofertas propios, se usan;
+// si no, no se añade schemaExtra (el LocalBusiness base lo pone BaseLayout).
+const schemaExtra = esp.schema_tipo
+  ? {
+      '@type': esp.schema_tipo,
+      makesOffer: (esp.schema_offers ?? []).map((o) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: o.name,
+          description: o.description,
+          areaServed: 'Alcobendas',
+        },
+      })),
+    }
+  : undefined;
 ---
 
 <BaseLayout
@@ -48,9 +46,7 @@ const schemaExtra = {
   schemaExtra={schemaExtra}
 >
 
-  <!-- ====================================================
-       1 · HERO
-       ==================================================== -->
+  <!-- 1 · HERO -->
   <section class="esp-hero">
     <div class="container container--wide">
       <div class="esp-hero__grid">
@@ -73,10 +69,9 @@ const schemaExtra = {
           </div>
         </div>
         <div class="esp-hero__image">
-          <!-- TODO: foto profesional de audiómetro / cabina audiometría / audífono -->
           <img
-            src={`${import.meta.env.BASE_URL}images/audifonos-placeholder.jpg`}
-            alt="Centro auditivo de Optifatima en Alcobendas"
+            src={`${import.meta.env.BASE_URL}images/${esp.imagen ?? 'bruno-placeholder.jpg'}`}
+            alt={`${esp.titulo_corto} en Optifatima, Alcobendas`}
             loading="eager"
           />
         </div>
@@ -84,18 +79,16 @@ const schemaExtra = {
     </div>
   </section>
 
-  <!-- ====================================================
-       2 · QUIÉN TE ATIENDE (autoridad técnica)
-       ==================================================== -->
+  <!-- 2 · QUIÉN TE ATIENDE -->
   <section class="section section--crema-claro">
     <div class="container container--narrow">
       <div class="autoridad">
         <span class="eyebrow">Quién te atiende</span>
         <h2>Un profesional, no un mostrador rotativo</h2>
         <p>
-          La diferencia entre un buen audífono y uno que acaba en un cajón es
-          quién lo adapta, lo programa y lo sigue durante el primer año.
-          En Optifatima esa persona es siempre la misma: <strong>{negocio.profesional.nombre}</strong>.
+          Lo que marca la diferencia en un caso técnico es quién lo evalúa,
+          lo resuelve y lo sigue después. En Optifatima esa persona es siempre
+          la misma: <strong>{negocio.profesional.nombre}</strong>.
         </p>
         <ul class="autoridad__credenciales">
           {esp.credenciales_relevantes.map((c) => (
@@ -106,14 +99,12 @@ const schemaExtra = {
     </div>
   </section>
 
-  <!-- ====================================================
-       3 · QUÉ HACEMOS
-       ==================================================== -->
+  <!-- 3 · QUÉ HACEMOS -->
   <section class="section">
     <div class="container">
       <div class="section-header">
         <span class="eyebrow">Servicios</span>
-        <h2>Qué hacemos en <em>audiología</em></h2>
+        <h2>Qué hacemos en <em>{esp.titulo_corto.toLowerCase()}</em></h2>
       </div>
       <div class="que-hacemos-grid">
         {esp.que_hacemos.map((item, i) => (
@@ -127,9 +118,7 @@ const schemaExtra = {
     </div>
   </section>
 
-  <!-- ====================================================
-       4 · POR QUÉ IMPORTA (diferenciador destacado)
-       ==================================================== -->
+  <!-- 4 · POR QUÉ IMPORTA -->
   <section class="section section--verde">
     <div class="container container--narrow">
       <div class="por-que-importa">
@@ -142,9 +131,7 @@ const schemaExtra = {
     </div>
   </section>
 
-  <!-- ====================================================
-       5 · FAQ específica
-       ==================================================== -->
+  <!-- 5 · FAQ -->
   <section class="section">
     <div class="container container--narrow">
       <div class="section-header">
@@ -162,21 +149,16 @@ const schemaExtra = {
     </div>
   </section>
 
-  <!-- ====================================================
-       6 · CONTACTO + MAPA
-       ==================================================== -->
+  <!-- 6 · CONTACTO -->
   <ContactoBlock
     id="contacto"
-    titulo="Tu centro auditivo en Alcobendas"
+    titulo={`${esp.titulo_corto} en Alcobendas`}
   />
 
 </BaseLayout>
 
 <style>
-  /* ---- HERO de sub-página ---- */
-  .esp-hero {
-    padding: var(--space-8) 0 var(--space-12);
-  }
+  .esp-hero { padding: var(--space-8) 0 var(--space-12); }
   .esp-hero__breadcrumbs {
     display: flex;
     gap: var(--space-2);
@@ -187,7 +169,6 @@ const schemaExtra = {
     text-transform: uppercase;
   }
   .esp-hero__breadcrumbs a:hover { color: var(--color-terracota); }
-
   .esp-hero__grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -203,33 +184,20 @@ const schemaExtra = {
     margin: var(--space-5) 0 var(--space-6);
     max-width: 52ch;
   }
-  .esp-hero__cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-  }
+  .esp-hero__cta { display: flex; flex-wrap: wrap; gap: var(--space-3); }
   .esp-hero__image img {
     border-radius: var(--radius-lg);
     aspect-ratio: 4 / 5;
     object-fit: cover;
     width: 100%;
   }
-
-  /* ---- AUTORIDAD ---- */
-  .autoridad h2 {
-    margin: var(--space-3) 0 var(--space-5);
-  }
+  .autoridad h2 { margin: var(--space-3) 0 var(--space-5); }
   .autoridad p {
     font-size: var(--text-lg);
     color: var(--color-verde-medio);
     margin-bottom: var(--space-5);
   }
-  .autoridad__credenciales {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-  }
+  .autoridad__credenciales { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-3); }
   .autoridad__credenciales li {
     background: var(--color-blanco);
     padding: var(--space-3) var(--space-5);
@@ -238,8 +206,6 @@ const schemaExtra = {
     color: var(--color-verde-prof);
     border: 1px solid var(--color-crema-oscuro);
   }
-
-  /* ---- QUÉ HACEMOS ---- */
   .que-hacemos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -258,22 +224,10 @@ const schemaExtra = {
     display: block;
     margin-bottom: var(--space-3);
   }
-  .que-hacemos-card h3 {
-    margin-bottom: var(--space-3);
-  }
-  .que-hacemos-card p {
-    color: var(--color-verde-medio);
-    font-size: var(--text-base);
-  }
-
-  /* ---- POR QUÉ IMPORTA ---- */
-  .por-que-importa {
-    text-align: center;
-    padding: var(--space-6) 0;
-  }
-  .por-que-importa h2 {
-    margin-bottom: var(--space-6);
-  }
+  .que-hacemos-card h3 { margin-bottom: var(--space-3); }
+  .que-hacemos-card p { color: var(--color-verde-medio); font-size: var(--text-base); }
+  .por-que-importa { text-align: center; padding: var(--space-6) 0; }
+  .por-que-importa h2 { margin-bottom: var(--space-6); }
   .por-que-importa__texto {
     font-family: var(--font-display);
     font-size: var(--text-xl);
@@ -283,15 +237,7 @@ const schemaExtra = {
     margin: 0 auto;
     max-width: 56ch;
   }
-
-  /* ---- SECTION HEADERS (reutilizable) ---- */
-  .section-header {
-    max-width: 720px;
-    margin-bottom: var(--space-10);
-  }
+  .section-header { max-width: 720px; margin-bottom: var(--space-10); }
   .section-header h2 { margin-bottom: var(--space-4); }
-  .section-header p {
-    font-size: var(--text-lg);
-    color: var(--color-verde-medio);
-  }
+  .section-header p { font-size: var(--text-lg); color: var(--color-verde-medio); }
 </style>

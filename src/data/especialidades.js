@@ -12,6 +12,11 @@ export const especialidades = [
     slug: "audifonos-alcobendas",
     titulo_corto: "Audífonos y centro auditivo",
     titulo_largo: "Audífonos en Alcobendas · Centro auditivo Optifatima",
+    schema_tipo: ["HearingAidStore", "LocalBusiness"],
+    schema_offers: [
+      { name: "Adaptación de audífonos", description: "Adaptación personalizada de audífonos por Técnico Superior en Audiología Protésica." },
+      { name: "Reparación de audífonos en 24 horas", description: "Servicio técnico propio. Reparación de audífonos en 24 horas en Alcobendas." },
+    ],
     seo: {
       title: "Audífonos en Alcobendas · Reparación 24h | Optifatima",
       description: "Centro auditivo en Alcobendas atendido por Técnico Superior en Audiología Protésica. Adaptación de audífonos y reparación en 24 horas. Calle Gobernador 1.",
