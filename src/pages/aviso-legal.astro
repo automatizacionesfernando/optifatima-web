@@ -1,0 +1,122 @@
+---
+// ============================================================
+// PÁGINA · /aviso-legal
+// ============================================================
+// Aviso legal mínimo conforme al art. 10 de la Ley 34/2002 (LSSI-CE).
+// Datos verificados via BORME salvo los marcados con [PENDIENTE],
+// que debe rellenar Bruno desde la escritura de constitución / nota
+// simple del Registro Mercantil y su carné de colegiado.
+// ============================================================
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { negocio } from '../data/negocio.js';
+
+const titulo = 'Aviso legal';
+const hoy = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long' });
+---
+
+<BaseLayout
+  title={`Aviso legal · ${negocio.nombre}`}
+  description="Información legal e identificativa de Optifatima, óptica y audiología en Alcobendas, conforme a la LSSI-CE."
+>
+  <section class="section legal">
+    <div class="container container--narrow">
+      <span class="eyebrow">Información legal</span>
+      <h1>{titulo}</h1>
+
+      <p class="legal__intro">
+        En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de
+        Servicios de la Sociedad de la Información y de Comercio Electrónico
+        (LSSI-CE), se facilitan a continuación los datos identificativos del
+        titular de este sitio web.
+      </p>
+
+      <h2>Titular del sitio web</h2>
+      <ul class="legal__datos">
+        <li><strong>Denominación social:</strong> OPTIFATIMA, S.L.</li>
+        <li><strong>Nombre comercial:</strong> {negocio.nombre}</li>
+        <li><strong>NIF:</strong> B86720141</li>
+        <li><strong>Domicilio:</strong> {negocio.direccion.calle}, {negocio.direccion.cp} {negocio.direccion.ciudad}, {negocio.direccion.provincia}</li>
+        <li><strong>Teléfono:</strong> {negocio.telefono}</li>
+        <li><strong>Correo electrónico:</strong> {negocio.email}</li>
+      </ul>
+
+      <h2>Datos registrales</h2>
+      <p>
+        Sociedad inscrita en el Registro Mercantil de Madrid,
+        [PENDIENTE: Tomo __, Folio __, Hoja M-______, Inscripción __].
+      </p>
+
+      <h2>Profesional colegiado</h2>
+      <p>
+        La actividad óptico-optometrista es una profesión sanitaria regulada.
+        {negocio.profesional.nombre}, óptico-optometrista, está colegiado en el
+        [PENDIENTE: Colegio profesional, p. ej. Colegio Nacional de Ópticos-Optometristas],
+        con número de colegiado [PENDIENTE: nº de colegiado].
+      </p>
+
+      <h2>Objeto</h2>
+      <p>
+        Este sitio web tiene carácter informativo sobre los servicios de óptica
+        y audiología que {negocio.nombre} presta en {negocio.direccion.ciudad}.
+        No se realizan ventas ni contrataciones en línea a través del sitio.
+      </p>
+
+      <h2>Cookies y datos de navegación</h2>
+      <p>
+        Este sitio web no instala cookies propias ni de terceros al cargar. El
+        mapa de ubicación se carga únicamente cuando el usuario pulsa
+        voluntariamente sobre él; en ese momento, Google Maps puede instalar sus
+        propias cookies, ajenas al titular de este sitio. No se recogen datos
+        personales a través de formularios.
+      </p>
+
+      <h2>Propiedad intelectual</h2>
+      <p>
+        Los contenidos de este sitio (textos, imágenes y logotipo) son
+        titularidad de OPTIFATIMA, S.L. o se utilizan con autorización. Queda
+        prohibida su reproducción sin consentimiento expreso del titular.
+      </p>
+
+      <h2>Legislación aplicable</h2>
+      <p>
+        Las presentes condiciones se rigen por la legislación española. Para
+        cualquier controversia será de aplicación la normativa vigente en España.
+      </p>
+
+      <p class="legal__fecha">Última actualización: {hoy}.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal h1 { margin-bottom: var(--space-6); }
+  .legal__intro {
+    font-size: var(--text-lg);
+    color: var(--color-verde-medio);
+    margin-bottom: var(--space-8);
+  }
+  .legal h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    color: var(--color-heading);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+  }
+  .legal p { margin-bottom: var(--space-4); line-height: 1.7; }
+  .legal__datos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-4);
+  }
+  .legal__datos li {
+    margin-bottom: var(--space-2);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--color-border);
+  }
+  .legal__fecha {
+    margin-top: var(--space-10);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+  }
+</style>

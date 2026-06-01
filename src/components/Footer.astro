@@ -58,7 +58,9 @@ const year = new Date().getFullYear();
 
     <div class="site-footer__bottom">
       <p>© {year} {negocio.nombre} · {negocio.tagline}</p>
-      {/* Enlaces legales retirados temporalmente — reactivar al publicar /aviso-legal, /privacidad y /cookies */}
+      <ul class="site-footer__legal">
+        <li><a href={`${import.meta.env.BASE_URL}aviso-legal`}>Aviso legal</a></li>
+      </ul>
     </div>
   </div>
 
