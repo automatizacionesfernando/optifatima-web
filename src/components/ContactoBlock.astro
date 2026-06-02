@@ -20,8 +20,8 @@ const {
   titulo = 'En el corazón de Alcobendas',
 } = Astro.props;
 
-// URL del mapa — solo se usa cuando el usuario pulsa el placeholder (sin cookies hasta entonces)
-const mapaSrc = `https://www.google.com/maps?q=${encodeURIComponent(negocio.direccion.formato_corto)}&output=embed`;
+// Enlace a Google Maps "Cómo llegar" (direcciones hacia la óptica)
+const comoLlegarUrl = 'https://www.google.com/maps/dir/?api=1&destination=Optifatima,+Calle+del+Gobernador+1,+28100+Alcobendas';
 ---
 
 <section id={id} class="section contacto-block">
@@ -91,24 +91,15 @@ const mapaSrc = `https://www.google.com/maps?q=${encodeURIComponent(negocio.dire
           >
             Escribir por WhatsApp
           </a>
+          <a
+            href={comoLlegarUrl}
+            class="btn btn--ghost"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Cómo llegar
+          </a>
         </div>
-      </div>
-
-      <!-- Columna derecha: mapa (carga al clic — no se cargan cookies de Google hasta que el usuario lo abre) -->
-      <div class="contacto-block__mapa">
-        <button
-          type="button"
-          class="mapa-placeholder"
-          data-mapa-src={mapaSrc}
-          aria-label="Ver el mapa de la ubicación de Optifatima en Google Maps"
-        >
-          <svg class="mapa-placeholder__pin" viewBox="0 0 24 24" width="44" height="44" fill="currentColor" aria-hidden="true">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>
-          </svg>
-          <span class="mapa-placeholder__titulo">Ver mapa</span>
-          <span class="mapa-placeholder__dir">{negocio.direccion.formato_corto}</span>
-          <span class="mapa-placeholder__nota">Al pulsar se carga Google Maps, que puede usar sus propias cookies.</span>
-        </button>
       </div>
     </div>
   </div>
@@ -123,12 +114,6 @@ const mapaSrc = `https://www.google.com/maps?q=${encodeURIComponent(negocio.dire
     grid-template-columns: 1fr;
     gap: var(--space-8);
     align-items: start;
-  }
-  @media (min-width: 900px) {
-    .contacto-block__grid {
-      grid-template-columns: 1fr 1.2fr;
-      gap: var(--space-10);
-    }
   }
 
   .contacto-block__info h2 {
@@ -179,67 +164,4 @@ const mapaSrc = `https://www.google.com/maps?q=${encodeURIComponent(negocio.dire
   @media (max-width: 540px) {
     .contacto-block__detalles { grid-template-columns: 1fr; }
   }
-
-  /* Mapa "al clic" — placeholder que no carga cookies hasta que el usuario pulsa */
-  .mapa-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-2);
-    width: 100%;
-    height: 500px;
-    border-radius: var(--radius-lg);
-    background: var(--color-crema);
-    border: 1px solid var(--color-border);
-    cursor: pointer;
-    text-align: center;
-    padding: var(--space-6);
-    font-family: var(--font-body);
-    color: var(--color-text-body);
-    transition: background var(--transition);
-  }
-  .mapa-placeholder:hover,
-  .mapa-placeholder:focus-visible {
-    background: var(--color-crema-claro);
-    outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
-  }
-  .mapa-placeholder__pin { color: var(--color-accent); }
-  .mapa-placeholder__titulo {
-    font-family: var(--font-display);
-    font-size: var(--text-xl);
-    color: var(--color-heading);
-  }
-  .mapa-placeholder__dir {
-    font-size: var(--text-base);
-    color: var(--color-verde-medio);
-  }
-  .mapa-placeholder__nota {
-    font-size: var(--text-xs);
-    color: var(--color-verde-medio);
-    opacity: 0.75;
-    max-width: 34ch;
-  }
 </style>
-
-<script>
-  function activarMapa(boton) {
-    const src = boton.getAttribute('data-mapa-src');
-    if (!src) return;
-    const iframe = document.createElement('iframe');
-    iframe.src = src;
-    iframe.width = '100%';
-    iframe.height = '500';
-    iframe.loading = 'lazy';
-    iframe.style.border = '0';
-    iframe.style.borderRadius = 'var(--radius-lg)';
-    iframe.setAttribute('allowfullscreen', '');
-    iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-    iframe.title = 'Ubicación de Optifatima en Alcobendas';
-    boton.replaceWith(iframe);
-  }
-  document.querySelectorAll('.mapa-placeholder').forEach((boton) => {
-    boton.addEventListener('click', () => activarMapa(boton));
-  });
-</script>

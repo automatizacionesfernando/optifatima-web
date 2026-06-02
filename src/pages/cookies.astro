@@ -1,0 +1,65 @@
+---
+// ============================================================
+// PÁGINA · /cookies
+// ============================================================
+// Política de cookies. Este sitio no usa cookies que requieran
+// consentimiento. Página no indexable (noindex,follow).
+// ============================================================
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { negocio } from '../data/negocio.js';
+
+const titulo = 'Política de cookies';
+---
+
+<BaseLayout
+  title={`Política de cookies · ${negocio.nombre}`}
+  description="Información sobre el uso de cookies en el sitio web de Optifatima. Este sitio no utiliza cookies de análisis, publicidad ni seguimiento."
+  robots="noindex,follow"
+>
+  <section class="section legal">
+    <div class="container container--narrow">
+      <span class="eyebrow">Información legal</span>
+      <h1>{titulo}</h1>
+
+      <h2>Uso de cookies en este sitio</h2>
+      <p>
+        Este sitio web no utiliza cookies de análisis, de publicidad ni de
+        seguimiento de ningún tipo. No empleamos Google Analytics ni
+        herramientas similares.
+      </p>
+
+      <h2>Cookies técnicas</h2>
+      <p>
+        Únicamente podrían utilizarse cookies técnicas estrictamente necesarias
+        para el correcto funcionamiento de la página, exentas del deber de
+        consentimiento conforme al artículo 22.2 de la LSSI-CE.
+      </p>
+
+      <h2>Alojamiento</h2>
+      <p>
+        El alojamiento se realiza en GitHub Pages, que puede registrar datos
+        técnicos de acceso (como la dirección IP) con fines de seguridad y
+        funcionamiento del servidor.
+      </p>
+
+      <h2>Banner de cookies</h2>
+      <p>
+        Al no instalarse cookies que requieran consentimiento, este sitio no
+        muestra banner de cookies.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal h1 { margin-bottom: var(--space-8); }
+  .legal h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    color: var(--color-heading);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+  }
+  .legal p { margin-bottom: var(--space-4); line-height: 1.7; }
+</style>

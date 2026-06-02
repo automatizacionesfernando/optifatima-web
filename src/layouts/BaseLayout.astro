@@ -18,6 +18,8 @@ interface Props {
   description: string;
   canonical?: string;
   ogImage?: string;
+  /** Valor de la meta robots (ej. "noindex,follow" en páginas legales). Si no se pasa, no se emite la etiqueta. */
+  robots?: string;
   /** Datos Schema.org adicionales específicos de la página (ej. una especialidad) */
   schemaExtra?: object;
 }
@@ -27,6 +29,7 @@ const {
   description,
   canonical = negocio.urls.sitio_web,
   ogImage = `${import.meta.env.BASE_URL}og-default.jpg`,
+  robots,
   schemaExtra,
 } = Astro.props;
 
@@ -87,6 +90,7 @@ const schema = schemaExtra
 
   <title>{title}</title>
   <meta name="description" content={description} />
+  {robots && <meta name="robots" content={robots} />}
   <link rel="canonical" href={canonical} />
 
   <!-- Open Graph -->

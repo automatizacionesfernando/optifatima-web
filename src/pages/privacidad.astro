@@ -1,0 +1,104 @@
+---
+// ============================================================
+// PÁGINA · /privacidad
+// ============================================================
+// Política de privacidad conforme al RGPD (UE 2016/679) y la
+// LOPDGDD (LO 3/2018). Página no indexable (noindex,follow).
+// ============================================================
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { negocio } from '../data/negocio.js';
+
+const titulo = 'Política de privacidad';
+---
+
+<BaseLayout
+  title={`Política de privacidad · ${negocio.nombre}`}
+  description="Información sobre el tratamiento de datos personales de Optifatima conforme al RGPD y la LOPDGDD."
+  robots="noindex,follow"
+>
+  <section class="section legal">
+    <div class="container container--narrow">
+      <span class="eyebrow">Información legal</span>
+      <h1>{titulo}</h1>
+
+      <p class="legal__intro">
+        De acuerdo con el RGPD (UE 2016/679) y la LOPDGDD (LO 3/2018), le
+        informamos sobre el tratamiento de sus datos.
+      </p>
+
+      <h2>1. Responsable del tratamiento</h2>
+      <ul class="legal__datos">
+        <li><strong>Titular:</strong> OPTIFATIMA, S.L.</li>
+        <li><strong>CIF:</strong> B-86720141</li>
+        <li><strong>Domicilio:</strong> Calle del Gobernador 1, 28100 Alcobendas (Madrid)</li>
+        <li><strong>Correo electrónico:</strong> optifatimaalcobendas@gmail.com</li>
+        <li><strong>Teléfono:</strong> 687 843 611</li>
+      </ul>
+
+      <h2>2. Qué datos tratamos y con qué finalidad</h2>
+      <p>
+        Tratamos los datos que nos facilita al contactar por correo electrónico,
+        teléfono o WhatsApp (nombre, correo electrónico, teléfono y el contenido
+        de su mensaje), con la única finalidad de atender y responder a su
+        consulta o solicitud de cita.
+      </p>
+
+      <h2>3. Legitimación</h2>
+      <p>
+        La base legal es su consentimiento, que presta al ponerse en contacto
+        con nosotros por cualquiera de los canales indicados.
+      </p>
+
+      <h2>4. Conservación</h2>
+      <p>
+        Conservamos sus datos durante el tiempo necesario para atender su
+        consulta y, después, durante los plazos legalmente exigibles. Si no
+        llega a ser cliente, se eliminarán una vez atendida la consulta.
+      </p>
+
+      <h2>5. Destinatarios</h2>
+      <p>
+        No cedemos sus datos a terceros, salvo obligación legal. Si nos escribe
+        por correo electrónico, dicho correo se gestiona a través de los
+        servidores de Google (Gmail), proveedor del servicio de correo.
+      </p>
+
+      <h2>6. Sus derechos</h2>
+      <p>
+        Puede ejercer los derechos de acceso, rectificación, supresión,
+        oposición, limitación del tratamiento y portabilidad escribiendo a
+        optifatimaalcobendas@gmail.com. También puede presentar una reclamación
+        ante la Agencia Española de Protección de Datos
+        (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">www.aepd.es</a>).
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal h1 { margin-bottom: var(--space-6); }
+  .legal__intro {
+    font-size: var(--text-lg);
+    color: var(--color-verde-medio);
+    margin-bottom: var(--space-8);
+  }
+  .legal h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    color: var(--color-heading);
+    margin-top: var(--space-8);
+    margin-bottom: var(--space-3);
+  }
+  .legal p { margin-bottom: var(--space-4); line-height: 1.7; }
+  .legal__datos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-4);
+  }
+  .legal__datos li {
+    margin-bottom: var(--space-2);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--color-border);
+  }
+</style>
