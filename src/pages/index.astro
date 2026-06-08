@@ -214,14 +214,25 @@ import { faq_general } from '../data/faq.js';
         <h2>{negocio.resenas.rating}★ con {negocio.resenas.total} reseñas en <em>Google</em></h2>
         <p>No lo decimos nosotros, lo dicen quienes ya confiaron en Optifatima.</p>
       </div>
-      <!--
-        TODO: extraer 3 reseñas reales del GBP de Optifatima
-        (con permiso del cliente o anonimizadas) para sustituir
-        este placeholder antes de publicar v1.0.
-      -->
-      <p class="marcas-placeholder">
-        <em>Bloque de reseñas pendiente. Extraer 3 reseñas reales del Google Business Profile antes de publicar.</em>
-      </p>
+      <div class="resenas-grid">
+        {negocio.resenas.destacadas.map((r) => (
+          <article class="resena-card">
+            <div class="resena-card__estrellas" aria-label={`${r.estrellas} de 5 estrellas`}>
+              {'★'.repeat(r.estrellas)}<span class="resena-card__estrellas-vacias">{'★'.repeat(5 - r.estrellas)}</span>
+            </div>
+            <p class="resena-card__texto">{r.texto}</p>
+            <div class="resena-card__pie">
+              <span class="resena-card__autor">{r.autor}</span>
+              <span class="resena-card__fecha">{r.fecha}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="resenas-cta">
+        <a href={negocio.resenas.url_perfil} class="btn btn--ghost" target="_blank" rel="noopener noreferrer">
+          Ver las {negocio.resenas.total} reseñas en Google
+        </a>
+      </div>
     </div>
   </section>
 
@@ -421,16 +432,50 @@ import { faq_general } from '../data/faq.js';
     font-size: var(--text-sm);
   }
 
-  /* ---- MARCAS / RESEÑAS PLACEHOLDER ---- */
-  .marcas-placeholder {
-    text-align: center;
-    color: var(--color-gris-suave);
-    font-size: var(--text-base);
-    padding: var(--space-8);
-    background: var(--color-crema-claro);
-    border: 1px dashed var(--color-crema-oscuro);
-    border-radius: var(--radius-lg);
+  /* ---- RESEÑAS ---- */
+  .resenas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-5);
+    align-items: stretch;
   }
+  .resena-card {
+    background: var(--color-blanco);
+    border: 1px solid var(--color-crema-oscuro);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+  }
+  .resena-card__estrellas {
+    color: var(--color-terracota);
+    font-size: var(--text-lg);
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-3);
+  }
+  .resena-card__estrellas-vacias { color: var(--color-crema-oscuro); }
+  .resena-card__texto {
+    flex: 1;
+    color: var(--color-verde-prof);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    margin-bottom: var(--space-5);
+  }
+  .resena-card__pie {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--color-crema-oscuro);
+    padding-top: var(--space-3);
+  }
+  .resena-card__autor { font-weight: 600; color: var(--color-verde-prof); }
+  .resena-card__fecha {
+    font-size: var(--text-xs);
+    color: var(--color-verde-medio);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: var(--space-1);
+  }
+  .resenas-cta { text-align: center; margin-top: var(--space-8); }
 
   /* ---- PROCESO ---- */
   .proceso-grid {

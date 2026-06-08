@@ -70,10 +70,33 @@ export const negocio = {
 
   // Reseñas (reales — actualizar mensualmente)
   resenas: {
-    rating: 4.4,
-    total: 23,
+    rating: 4.6,
+    total: 34,
     plataforma: "Google",
-    ultima_actualizacion: "2026-05",
+    ultima_actualizacion: "2026-06",
+    // Perfil real de Google Maps (place_id de Optifatima)
+    url_perfil: "https://www.google.com/maps/place/?q=place_id:ChIJe6Bk3_IsQg0R7Q0pFn2v5pw",
+    // 3 reseñas reales destacadas en la home
+    destacadas: [
+      {
+        autor: "Zaida López Arroyo",
+        estrellas: 5,
+        fecha: "Hace un mes",
+        texto: "Excelente atención. El dueño es un gran profesional y súper atento. Me sorprendió lo detallado que fue el examen de la vista y la gran selección de monturas que tienen, ¡hay para todos los gustos! El trato humano y la calidad del servicio son de lo mejor. ¡Muy recomendable!",
+      },
+      {
+        autor: "Javier Álvarez",
+        estrellas: 5,
+        fecha: "Hace una semana",
+        texto: "Una vez más Bruno me soluciona mi problema con mis gafas, cristales nuevos a muy buen precio y de una calidad espectacular. Como siempre, mi óptica de confianza.",
+      },
+      {
+        autor: "Rodrigo",
+        estrellas: 5,
+        fecha: "Hace 4 meses",
+        texto: "Ayer estuve por urgencia en esta óptica, pidiendo presupuesto para un tema imposible. Lo normal es que por ello me despachara en 2 minutos. Pues no. El óptico fue increíble y estuvo dándome todas las soluciones que pudo, por difícil que fuera. Se preocupó tanto como si fuera suyo el problema. Y por ello os recomiendo esta óptica. El trato al cliente fue excelente y os aconsejo que la visitéis porque conmigo ha ganado un cliente por esto. ¡100% recomendable! ¡Gracias por todo!",
+      },
+    ],
   },
 
   // Garantías y condiciones comerciales
@@ -94,7 +117,7 @@ export const negocio = {
 
   // URLs y redes
   urls: {
-    google_maps: "https://maps.google.com", // PLACEHOLDER — sustituir por enlace real al GBP
+    google_maps: "https://www.google.com/maps/place/?q=place_id:ChIJe6Bk3_IsQg0R7Q0pFn2v5pw",
     sitio_web: "https://optifatima.es",     // PLACEHOLDER — dominio final
   },
 
