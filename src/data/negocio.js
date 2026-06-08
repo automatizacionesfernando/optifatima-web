@@ -27,9 +27,9 @@ export const negocio = {
     provincia: "Madrid",
     pais: "España",
     formato_corto: "Calle Gobernador 1, 28100 Alcobendas",
-    // coordenadas a confirmar — sustituir por las reales
-    lat: 40.5470, // PLACEHOLDER — confirmar
-    lng: -3.6420, // PLACEHOLDER — confirmar
+    // coordenadas reales del local (Google Maps, marcador de Optifatima)
+    lat: 40.5444613,
+    lng: -3.6410378,
   },
 
   // Horarios — Bruno trabaja solo, cierra sábados, domingos y festivos
